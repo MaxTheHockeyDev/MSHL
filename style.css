@@ -1,0 +1,40 @@
+body{
+    background:#0a0f1a;
+    color:white;
+    font-family: Arial;
+    margin:0;
+}
+
+header{
+    padding:20px;
+    text-align:center;
+    background:#121826;
+}
+
+select{
+    padding:8px;
+    font-size:16px;
+    margin-top:10px;
+}
+
+table{
+    width:90%;
+    margin:40px auto;
+    border-collapse: collapse;
+    background:#111827;
+}
+
+th, td{
+    padding:14px;
+    text-align:left;
+    border-bottom:1px solid #1f2937;
+}
+
+th{
+    cursor:pointer;
+    background:#1f2937;
+}
+
+tr:hover{
+    background:#1f2937;
+}
