@@ -24,13 +24,13 @@ function renderTable(){
         <tr>
             <td>
                 <a href="player.html?id=${p.id}&season=${currentSeason}">
-                    ${p.name}
+                    ${p.Name}
                 </a>
             </td>
             <td>${p.GP}</td>
             <td>${p.G}</td>
             <td>${p.A}</td>
-            <td>${p.P}</td>
+            <td>${p.PTS}</td>
         </tr>
         `;
 
