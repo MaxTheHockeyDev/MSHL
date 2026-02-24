@@ -22,13 +22,18 @@ function renderTable(){
     players.forEach(p=>{
         let row = `
         <tr>
-            <td>${p.Name}</td>
+            <td>
+                <a href="player.html?id=${p.id}&season=${currentSeason}">
+                    ${p.name}
+                </a>
+            </td>
             <td>${p.GP}</td>
             <td>${p.G}</td>
             <td>${p.A}</td>
             <td>${p.P}</td>
         </tr>
         `;
+
         statsBody.innerHTML += row;
     });
 }
@@ -45,6 +50,4 @@ function sortTable(key){
 }
 
 loadSeason();
-
-// Optional auto refresh every 60 seconds
 setInterval(loadSeason, 60000);
