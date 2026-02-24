@@ -38,3 +38,15 @@ th{
 tr:hover{
     background:#1f2937;
 }
+
+.profile{
+    width:60%;
+    margin:60px auto;
+    background:#111827;
+    padding:30px;
+    border-radius:12px;
+}
+
+.profile h1{
+    margin-bottom:20px;
+}
