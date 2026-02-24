@@ -23,7 +23,7 @@ function renderTable(){
         let row = `
         <tr>
             <td>
-                <a href="player.html?id=${p.id}&season=${currentSeason}">
+                <a href="player.html?id=${p.ID}&season=${currentSeason}">
                     ${p.Name}
                 </a>
             </td>
