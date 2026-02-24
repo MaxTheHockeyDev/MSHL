@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hockey League Stats</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>🏒 Hockey League Stats</h1>
+
+    <select id="seasonSelect">
+        <option value="s1">Season 1</option>
+        <option value="s2">Season 2</option>
+        <option value="s3">Season 3</option>
+    </select>
+</header>
+
+<main>
+    <table id="statsTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable('name')">Player</th>
+                <th onclick="sortTable('gp')">GP</th>
+                <th onclick="sortTable('g')">G</th>
+                <th onclick="sortTable('a')">A</th>
+                <th onclick="sortTable('p')">P</th>
+            </tr>
+        </thead>
+        <tbody id="statsBody"></tbody>
+    </table>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
