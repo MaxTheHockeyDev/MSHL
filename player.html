@@ -8,42 +8,95 @@
 <body>
 
 <div class="profile">
-    <h1 id="playerName"></h1>
 
-    <div id="playerStats"></div>
+<h1 id="playerName"></h1>
 
-    <a href="index.html">← Back to Stats</a>
+<h2>🏆 Career Stats</h2>
+<div id="careerStats"></div>
+
+<h2 style="margin-top:30px">📊 Season By Season</h2>
+<table id="seasonTable">
+    <thead>
+        <tr>
+            <th>Season</th>
+            <th>GP</th>
+            <th>G</th>
+            <th>A</th>
+            <th>P</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<a href="index.html">← Back to Stats</a>
+
 </div>
 
 <script>
-async function loadPlayer(){
 
-    const params = new URLSearchParams(window.location.search);
+const params = new URLSearchParams(window.location.search);
+const playerId = params.get("id");
 
-    const playerId = params.get("id");
-    const season = params.get("season") || "s1";
+async function loadCareer(){
 
-    const res = await fetch(`data/${season}.json`);
-    const players = await res.json();
+    const seasons = ["s1","s2","s3","s4"];
 
-    const player = players.find(p => p.ID === playerId);
+    let careerTotals = {
+        gp:0,
+        g:0,
+        a:0,
+        p:0
+    };
 
-    if(!player){
-        document.body.innerHTML = "<h2>Player not found</h2>";
-        return;
+    let seasonRows = [];
+    let playerName = "Player";
+
+    for(let season of seasons){
+
+        try{
+            const res = await fetch(`data/${season}.json`);
+            const players = await res.json();
+
+            const player = players.find(p => p.ID === playerId);
+            if(!player) continue;
+
+            playerName = player.Name;
+
+            careerTotals.gp += player.GP;
+            careerTotals.g += player.G;
+            careerTotals.a += player.A;
+            careerTotals.p += player.PTS;
+
+            seasonRows.push(`
+                <tr>
+                    <td>${season.toUpperCase()}</td>
+                    <td>${player.GP}</td>
+                    <td>${player.G}</td>
+                    <td>${player.A}</td>
+                    <td>${player.PTS}</td>
+                </tr>
+            `);
+
+        }catch(err){
+            console.log("Skipping season", season);
+        }
     }
 
-    document.getElementById("playerName").innerText = player.Name;
+    document.getElementById("playerName").innerText = playerName;
 
-    document.getElementById("playerStats").innerHTML = `
-        <p>GP: ${player.GP}</p>
-        <p>Goals: ${player.G}</p>
-        <p>Assists: ${player.A}</p>
-        <p>Points: ${player.PTS}</p>
+    document.getElementById("careerStats").innerHTML = `
+        <p>GP: ${careerTotals.gp}</p>
+        <p>Goals: ${careerTotals.g}</p>
+        <p>Assists: ${careerTotals.a}</p>
+        <p>Points: ${careerTotals.p}</p>
     `;
+
+    document.querySelector("#seasonTable tbody").innerHTML = seasonRows.join("");
+
 }
 
-loadPlayer();
+loadCareer();
+
 </script>
 
 </body>
